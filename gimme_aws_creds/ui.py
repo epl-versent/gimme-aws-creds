@@ -108,7 +108,7 @@ class CLIUserInterface(UserInterface):
         builtins.print(message, file=sys.stderr)
 
     def read_input(self, hidden=False):
-        builtins.input()
+        return builtins.input()
 
     def notify(self, message):
         builtins.print(message, file=sys.stderr)
