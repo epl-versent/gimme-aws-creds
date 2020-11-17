@@ -13,13 +13,13 @@ See the License for the specific language governing permissions and* limitations
 from __future__ import print_function, absolute_import, unicode_literals
 
 import base64
+import builtins
 from threading import Event, Thread
 
 from fido2.client import Fido2Client, ClientError
 from fido2.hid import CtapHidDevice, STATUS
 from fido2 import utils
 from fido2.webauthn import PublicKeyCredentialRequestOptions
-from getpass import getpass
 from gimme_aws_creds.errors import NoFIDODeviceFoundError, FIDODeviceTimeoutError
 
 
@@ -76,7 +76,7 @@ class WebAuthnClient(object):
             pin = None
             if client.info.options.get("clientPin"):
                 # Prompt for PIN if needed
-                pin = getpass("Please enter PIN: ")
+                pin = builtins.input("Please enter PIN: ")
             request_options=PublicKeyCredentialRequestOptions(challenge=utils.websafe_decode(self._challenge), rp_id=self._rp['id'], allow_credentials=self._allow_list)
             self._assertions, self._client_data = client.get_assertion(request_options, on_keepalive=self.on_keepalive, event=self._cancel, pin=pin)
         except ClientError as e:

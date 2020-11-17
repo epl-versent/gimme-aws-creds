@@ -10,7 +10,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and* limitations under the License.*
 """
 import base64
-import getpass
+import builtins
 import re
 import time
 import uuid
@@ -904,7 +904,7 @@ class OktaClient(object):
             # via OKTA_USERNAME env and user might not remember.
             for x in range(0, 5):
                 passwd_prompt = "Okta Password for {}: ".format(username)
-                password = getpass.getpass(prompt=passwd_prompt)
+                password = builtins.input(prompt=passwd_prompt)
                 if len(password) > 0:
                     break
 
